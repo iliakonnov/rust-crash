@@ -1,7 +1,9 @@
-#![no_std]
 #![no_main]
+#![no_std]
 
-#[no_mangle]
-fn _start() -> u32 {
-    42
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_panic: &PanicInfo<'_>) -> ! {
+    loop {}
 }
