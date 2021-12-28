@@ -16,7 +16,7 @@ $ diff x86_64-unknown-none.json x86_64-custom.json
 >   "features": "-mmx,+sse,+sse2,-sse3,-ssse3,-sse4.1,-sse4.2,-3dnow,-3dnowa,-avx,-avx2,+soft-float",
 ```
 
-Note: just `-sse,+sse2` will give SIGTRAP too.
+Note: just `-sse,+sse2` will give SIGTRAP too, but this configuration have no sence since SSE2 can't exist without SSE.
 
 # Building
 ```
@@ -42,8 +42,9 @@ release: 1.59.0-nightly
 LLVM version: 13.0.0
 ```
 
-# GDB
+# GDB backtrace
 ```
+Note:
 $ rust-gdb --args rustc …
 (gdb) r
 Thread 18 "opt compiler_bu" received signal SIGTRAP, Trace/breakpoint trap.
@@ -101,3 +102,5 @@ Thread 18 "opt compiler_bu" received signal SIGTRAP, Trace/breakpoint trap.
 #26 0x00007ffff3ea9259 in start_thread () from /usr/lib/libpthread.so.0
 #27 0x00007ffff3dc75e3 in clone () from /usr/lib/libc.so.6
 ```
+Note: backtrace taken on earlier version: `rustc 1.59.0-nightly (51e8031e1 2021-12-25)`, but on newer version error is same.
+
